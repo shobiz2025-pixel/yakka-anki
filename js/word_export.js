@@ -260,11 +260,10 @@ var WordExport = (function() {
   // エクスポート5: 厚生労働省資料風レイアウト（Q&A原本風）
   // ====================================================
   function exportOriginalLayout(qaData, qaTextAll, versionLabel) {
-    var version = VersionConfig.getCurrentVersion();
     var title = '『薬価算定の基準』Q&A';
     var html = getDocHeader(title);
 
-    html += '<div style="text-align:right; margin-bottom:12pt;">' + escHtml(version.qaDate || versionLabel) + '</div>';
+    html += '<div style="text-align:right; margin-bottom:12pt;">' + escHtml(versionLabel || '令和8年3月現在') + '</div>';
     html += '<h1 style="text-align:center; border:none;">' + escHtml(title) + '</h1>';
     html += '<p style="text-align:center;">＜本文＞</p>';
 
