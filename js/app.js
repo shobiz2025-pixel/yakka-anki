@@ -135,14 +135,15 @@
       const titleDisplay = item.title.length > 60
         ? item.title.substring(0, 60) + '…'
         : item.title;
-      const bodyText = item.answer
-        .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
-        .replace(/\\n/g, '\n');
+      const qaText = getQaTextsForItem(item);
+      const bodyHtml = qaText
+        ? `<div class="qa-text-content">${formatQaText(qaText)}</div>`
+        : `<div class="qa-all-item-body-empty">Q&Aデータなし</div>`;
       html += `<div class="qa-all-item">
         <div class="qa-all-item-title">
           <span class="qa-all-item-num">${item.id}</span>${titleDisplay}
         </div>
-        <div class="qa-all-item-body">${bodyText}</div>
+        ${bodyHtml}
       </div>`;
     });
 
