@@ -11,6 +11,7 @@
   function getChapterKey(section) {
     if (section.includes('第１章')) return '第１章';
     if (section.includes('第２章')) return '第２章';
+    if (section.includes('第５節 再算定')) return '第５節 再算定';
     if (section.includes('第３章')) return '第３章';
     if (section.includes('第４章')) return '第４章';
     return '他';
@@ -20,6 +21,7 @@
     const labels = {
       '第１章': '第１章 定義',
       '第２章': '第２章 新規収載品',
+      '第５節 再算定': '第５節 再算定',
       '第３章': '第３章 既収載品',
       '第４章': '第４章 実施時期等'
     };
@@ -27,7 +29,7 @@
   }
 
   function getChClass(key) {
-    const map = { '第１章': 'ch1', '第２章': 'ch2', '第３章': 'ch3', '第４章': 'ch4' };
+    const map = { '第１章': 'ch1', '第２章': 'ch2', '第５節 再算定': 'ch3', '第３章': 'ch3', '第４章': 'ch4' };
     return map[key] || '';
   }
 
@@ -63,7 +65,7 @@
   function renderChapterProgress() {
     const stats = YakkaStore.getChapterStats(QA_DATA);
     const container = document.getElementById('chapterProgress');
-    const order = ['第１章', '第２章', '第３章', '第４章'];
+    const order = ['第１章', '第２章', '第５節 再算定', '第３章', '第４章'];
     let html = '';
 
     order.forEach(key => {

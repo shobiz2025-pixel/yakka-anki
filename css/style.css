@@ -531,6 +531,25 @@ body {
 .qa-text-content .qa-normal-line {
   margin-top: 2px;
 }
+.qa-text-content .qa-q-body {
+  color: var(--primary-dark);
+  background: var(--primary-light);
+  padding: 2px 12px 2px 12px;
+  margin-top: 0;
+}
+.qa-text-content .qa-ex-body {
+  color: var(--text-secondary);
+  font-size: 12px;
+  padding-left: 4px;
+  border-left: 2px solid var(--border);
+  margin-top: 2px;
+}
+.qa-text-content .qa-example-line {
+  margin-top: 4px;
+  padding-left: 24px;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
 /* Q&A tables */
 .qa-text-content table {
   width: 100%;

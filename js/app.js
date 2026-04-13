@@ -26,6 +26,7 @@
   function getChapterClass(section) {
     if (section.includes('第１章')) return 'ch1';
     if (section.includes('第２章')) return 'ch2';
+    if (section.includes('第５節 再算定')) return 'ch3';
     if (section.includes('第３章')) return 'ch3';
     if (section.includes('第４章')) return 'ch4';
     return '';
@@ -168,6 +169,8 @@
     const lines = rawText.split('\n');
     let html = '';
     let i = 0;
+    // state: 'none' | 'question' | 'answer' | 'commentary' | 'notes' | 'reference'
+    let state = 'none';
 
     while (i < lines.length) {
       const line = lines[i].trim();
@@ -175,26 +178,44 @@
       // Detect table block (consecutive lines starting with |)
       if (line.startsWith('|')) {
         html += buildTable(lines, i);
-        // Skip table lines
         while (i < lines.length && lines[i].trim().startsWith('|')) i++;
         continue;
       }
 
       if (!line) { i++; continue; }
 
-      // Classify line
+      // State transitions and classification
       if (/^問\s*\d/.test(line) || /^問\d/.test(line)) {
+        state = 'question';
         html += `<div class="qa-q-line">${escapeHtml(line)}</div>`;
-      } else if (/^（答）/.test(line) || /^（答）/.test(line)) {
+      } else if (/^（答）/.test(line)) {
+        state = 'answer';
         html += `<div class="qa-a-line">${escapeHtml(line)}</div>`;
-      } else if (/^（解説）/.test(line) || /^（解説）/.test(line)) {
+      } else if (/^（解説）/.test(line)) {
+        state = 'commentary';
+        html += `<div class="qa-ex-line">${escapeHtml(line)}</div>`;
+      } else if (/^（注）/.test(line)) {
+        state = 'notes';
+        html += `<div class="qa-ex-line">${escapeHtml(line)}</div>`;
+      } else if (/^（参考）/.test(line)) {
+        state = 'reference';
         html += `<div class="qa-ex-line">${escapeHtml(line)}</div>`;
       } else if (/^＜[^＞]+＞/.test(line)) {
+        state = 'none';
         html += `<div class="qa-subheader-line">${escapeHtml(line)}</div>`;
+      } else if (/^（例）/.test(line)) {
+        html += `<div class="qa-example-line">${escapeHtml(line)}</div>`;
       } else if (/^(第[1-9１-９]章|第[1-9１-９]節|<|\d+[.．]\s|[０-９]+[.．])/.test(line) && line.length < 40) {
         html += `<div class="qa-section-line">${escapeHtml(line)}</div>`;
       } else {
-        html += `<div class="qa-normal-line">${escapeHtml(line)}</div>`;
+        // Continuation lines — style based on current state
+        if (state === 'question') {
+          html += `<div class="qa-q-body">${escapeHtml(line)}</div>`;
+        } else if (state === 'commentary' || state === 'notes' || state === 'reference') {
+          html += `<div class="qa-ex-body">${escapeHtml(line)}</div>`;
+        } else {
+          html += `<div class="qa-normal-line">${escapeHtml(line)}</div>`;
+        }
       }
       i++;
     }
