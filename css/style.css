@@ -645,6 +645,13 @@ body {
 .qa-all-section-header.ch2 { border-color: var(--section-ch2); color: var(--section-ch2); }
 .qa-all-section-header.ch3 { border-color: var(--section-ch3); color: var(--section-ch3); }
 .qa-all-section-header.ch4 { border-color: var(--section-ch4); color: var(--section-ch4); }
+.qa-all-subsection-header {
+  font-weight: 700;
+  font-size: 15px;
+  padding: 10px 16px 6px;
+  border-bottom: 1px solid var(--border);
+  background: rgba(45,106,159,0.06);
+}
 .qa-all-item {
   background: var(--card-bg);
   border: 1px solid var(--border);

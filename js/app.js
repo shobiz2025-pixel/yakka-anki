@@ -149,6 +149,7 @@
       }
 
       html += `<div class="qa-all-item">
+        <div class="qa-all-subsection-header">${item.title}</div>
         <div class="qa-text-content">${formatQaText(filtered)}</div>
       </div>`;
     });
