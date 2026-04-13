@@ -122,8 +122,10 @@
     const view = document.getElementById('qaAllView');
     if (!view) return;
     const data = getCurrentQaData();
+    const qaTextAll = getCurrentQaTextAll();
     let html = '';
     let lastSection = '';
+    const shownQaKeys = new Set(); // 重複排除用
 
     data.forEach(item => {
       const sectionKey = item.breadcrumb || item.section;
@@ -139,11 +141,26 @@
       // 条文テキスト（常に表示）
       const answerHtml = `<div class="qa-all-item-body">${escapeHtml(item.answer).replace(/\n/g, '<br>')}</div>`;
 
-      // Q&Aテキスト（あれば条文の下に表示）
-      const qaText = getQaTextsForItem(item);
-      const qaHtml = qaText
-        ? `<div class="qa-all-qa-block"><div class="qa-text-content">${formatQaText(qaText)}</div></div>`
-        : '';
+      // 未表示のQ&Aキーのみ取得（重複排除）
+      const qaSlides = (item.slides || []).filter(s => s.startsWith('qa_') && !shownQaKeys.has(s));
+      let qaHtml = '';
+      if (qaSlides.length > 0) {
+        const texts = qaSlides.map(s => {
+          shownQaKeys.add(s);
+          return qaTextAll[s];
+        }).filter(Boolean);
+
+        if (texts.length > 0) {
+          const rawText = texts.join('\n\n');
+          // qa_questionsフィルターを適用（ある場合）
+          const filtered = item.qa_questions && item.qa_questions.length > 0
+            ? filterQaTextByQuestions(rawText, item.qa_questions)
+            : rawText;
+          if (filtered) {
+            qaHtml = `<div class="qa-all-qa-block"><div class="qa-text-content">${formatQaText(filtered)}</div></div>`;
+          }
+        }
+      }
 
       html += `<div class="qa-all-item">
         <div class="qa-all-item-title">
