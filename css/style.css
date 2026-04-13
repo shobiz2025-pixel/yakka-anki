@@ -683,8 +683,7 @@ body {
 .qa-all-item .qa-text-content {
   padding: 10px 14px;
 }
-.qa-all-item-body-empty {
-  padding: 10px 14px;
-  font-size: 12px;
-  color: var(--text-secondary);
+.qa-all-qa-block {
+  border-top: 1px dashed var(--border);
+  background: rgba(45,106,159,0.03);
 }

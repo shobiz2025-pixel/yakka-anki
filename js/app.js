@@ -135,15 +135,21 @@
       const titleDisplay = item.title.length > 60
         ? item.title.substring(0, 60) + '…'
         : item.title;
+
+      // 条文テキスト（常に表示）
+      const answerHtml = `<div class="qa-all-item-body">${escapeHtml(item.answer).replace(/\n/g, '<br>')}</div>`;
+
+      // Q&Aテキスト（あれば条文の下に表示）
       const qaText = getQaTextsForItem(item);
-      const bodyHtml = qaText
-        ? `<div class="qa-text-content">${formatQaText(qaText)}</div>`
-        : `<div class="qa-all-item-body-empty">Q&Aデータなし</div>`;
+      const qaHtml = qaText
+        ? `<div class="qa-all-qa-block"><div class="qa-text-content">${formatQaText(qaText)}</div></div>`
+        : '';
+
       html += `<div class="qa-all-item">
         <div class="qa-all-item-title">
           <span class="qa-all-item-num">${item.id}</span>${titleDisplay}
         </div>
-        ${bodyHtml}
+        ${answerHtml}${qaHtml}
       </div>`;
     });
 
