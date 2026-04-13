@@ -18,7 +18,6 @@
   <img src="icons/app_logo.png" class="header-logo" alt="ロゴ">
   <h1>薬価算定の基準</h1>
   <span class="count" id="viewCount">0/112</span>
-  <select id="versionSelect" class="version-select" onchange="switchVersion(this.value)" title="年度版切替"></select>
   <a href="dashboard.html" class="header-link">📊</a>
 </div>
 <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
@@ -85,17 +84,7 @@
   <img id="imgViewerImg" src="" alt="">
 </div>
 
-<script src="data.js"></script>
-<!-- 令和6年度版テキスト -->
-<script src="js/qa_text_01.js"></script>
-<script src="js/qa_text_02.js"></script>
-<script src="js/qa_text_03.js"></script>
-<script src="js/qa_text_04.js"></script>
-<script src="js/qa_text_05.js"></script>
-<script src="js/qa_text_06.js"></script>
-<script src="js/qa_text_07.js"></script>
-<script src="js/qa_text_index.js"></script>
-<!-- 令和8年度版テキスト -->
+<script src="data/r08/data.js"></script>
 <script src="js/qa_text_r8_01.js"></script>
 <script src="js/qa_text_r8_02.js"></script>
 <script src="js/qa_text_r8_03.js"></script>
@@ -105,40 +94,9 @@
 <script src="js/qa_text_r8_07.js"></script>
 <script src="js/qa_text_r8_08.js"></script>
 <script src="data/r08/qa_text_index.js"></script>
-<script src="js/version_config.js"></script>
 <script src="js/qa_parser.js"></script>
 <script src="js/word_export.js"></script>
 <script src="js/store.js"></script>
 <script src="js/app.js"></script>
-<script>
-// バージョン切替UI初期化
-(function() {
-  function initVersionSelect() {
-    if (typeof VersionConfig === 'undefined') return;
-    var select = document.getElementById('versionSelect');
-    if (!select) return;
-    var versions = VersionConfig.getAllVersions();
-    var currentId = VersionConfig.getCurrentVersionId();
-    select.innerHTML = '';
-    versions.forEach(function(v) {
-      var opt = document.createElement('option');
-      opt.value = v.id;
-      opt.textContent = v.label;
-      opt.selected = (v.id === currentId);
-      select.appendChild(opt);
-    });
-  }
-  window.switchVersion = function(versionId) {
-    if (typeof VersionConfig === 'undefined') return;
-    VersionConfig.setCurrentVersion(versionId);
-    location.reload();
-  };
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initVersionSelect);
-  } else {
-    initVersionSelect();
-  }
-})();
-</script>
 </body>
 </html>

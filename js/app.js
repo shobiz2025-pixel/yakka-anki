@@ -31,14 +31,11 @@
     return '';
   }
 
-  // バージョン対応: VersionConfigがあればそちらを使い、なければ直接参照
   function getCurrentQaData() {
-    if (typeof VersionConfig !== 'undefined') return VersionConfig.getQaData();
-    return typeof QA_DATA !== 'undefined' ? QA_DATA : [];
+    return typeof QA_DATA_R08 !== 'undefined' ? QA_DATA_R08 : [];
   }
   function getCurrentQaTextAll() {
-    if (typeof VersionConfig !== 'undefined') return VersionConfig.getQaTextAll();
-    return typeof QA_TEXT_ALL !== 'undefined' ? QA_TEXT_ALL : {};
+    return typeof QA_TEXT_ALL_R08 !== 'undefined' ? QA_TEXT_ALL_R08 : {};
   }
 
   function getFilteredData() {
@@ -255,7 +252,10 @@
       var match = part.match(/^問(\d+(?:-\d+)?)[\s　]/);
       return match && questionIds.indexOf(match[1]) !== -1;
     });
-    return filtered.map(function(p) { return p.trim(); }).join('\n\n');
+    return filtered.map(function(p) {
+      // 末尾のセクション見出し行（「2　一日薬価」「9　新薬」「＜...＞」等）を除去
+      return p.replace(/(\n+(?:\d+(?:\.\d+)?[\s　][^\n]*|＜[^＞\n]*＞)\s*)+$/, '').trim();
+    }).join('\n\n');
   }
 
   function setupContentSwiper(item) {
