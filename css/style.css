@@ -1,16 +1,18 @@
 :root {
-  --primary: #1a73e8;
-  --primary-light: #e8f0fe;
-  --bg: #f5f5f5;
+  --primary: #2d6a9f;
+  --primary-dark: #1e4d73;
+  --primary-mid: #3a82c4;
+  --primary-light: #dceef8;
+  --bg: #eef4f9;
   --card-bg: #fff;
-  --text: #202124;
-  --text-secondary: #5f6368;
-  --border: #dadce0;
-  --accent: #ea4335;
-  --section-ch1: #1a73e8;
-  --section-ch2: #0d652d;
-  --section-ch3: #e37400;
-  --section-ch4: #9334e6;
+  --text: #1a2533;
+  --text-secondary: #5a7390;
+  --border: #c8dcea;
+  --accent: #e05c4a;
+  --section-ch1: #2d6a9f;
+  --section-ch2: #1a7a4a;
+  --section-ch3: #c07a00;
+  --section-ch4: #7b3fad;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -28,13 +30,13 @@ body {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: var(--primary);
+  background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 55%, var(--primary-mid) 100%);
   color: #fff;
   padding: 12px 16px;
   display: flex;
   align-items: center;
   gap: 12px;
-  box-shadow: 0 2px 4px rgba(0,0,0,.15);
+  box-shadow: 0 2px 8px rgba(30,77,115,.3);
 }
 .header h1 {
   font-size: 16px;
@@ -78,7 +80,7 @@ body {
   display: flex;
   gap: 6px;
   padding: 10px 12px;
-  background: #fff;
+  background: linear-gradient(180deg, #dceef8 0%, #eef4f9 100%);
   border-bottom: 1px solid var(--border);
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
@@ -131,7 +133,7 @@ body {
   margin-bottom: 4px;
   cursor: pointer;
   transition: background .15s;
-  border: 1px solid transparent;
+  border: 1px solid var(--border);
   gap: 10px;
 }
 .q-item:active {
@@ -178,9 +180,9 @@ body {
   font-size: 11px;
   font-weight: 700;
 }
-.q-assess-mark.mark-good { color: #0d652d; }
-.q-assess-mark.mark-shaky { color: #e37400; }
-.q-assess-mark.mark-bad { color: #ea4335; }
+.q-assess-mark.mark-good { color: #1a7a4a; }
+.q-assess-mark.mark-shaky { color: #c07a00; }
+.q-assess-mark.mark-bad { color: #e05c4a; }
 .q-item .q-arrow {
   flex-shrink: 0;
   width: 24px;
@@ -196,8 +198,8 @@ body {
 }
 
 .q-item.viewed .q-num {
-  background: #e8e8e8;
-  color: #999;
+  background: #e0eaf2;
+  color: #8aa5bc;
 }
 
 /* Answer overlay */
@@ -222,7 +224,7 @@ body {
 }
 .overlay-panel {
   flex: 1;
-  background: #fff;
+  background: linear-gradient(180deg, #f5faff 0%, #fff 80px);
   border-radius: 16px 16px 0 0;
   display: flex;
   flex-direction: column;
@@ -278,17 +280,17 @@ body {
   width: 32px;
   height: 32px;
   border: none;
-  background: #f1f3f4;
+  background: var(--primary-light);
   border-radius: 50%;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--text-secondary);
+  color: var(--primary);
   font-size: 18px;
   transition: background .15s;
 }
-.close-btn:active { background: #dadce0; }
+.close-btn:active { background: var(--border); }
 
 .overlay-body {
   flex: 1;
@@ -311,6 +313,7 @@ body {
   border-top: 1px solid var(--border);
   flex-shrink: 0;
   justify-content: center;
+  background: linear-gradient(180deg, #fff 0%, #f5faff 100%);
 }
 .assess-btn {
   width: 52px;
@@ -324,12 +327,12 @@ body {
   transition: all .15s;
 }
 .assess-btn:active { transform: scale(.95); }
-.assess-btn[data-mark="○"] { color: #0d652d; }
-.assess-btn[data-mark="△"] { color: #e37400; }
-.assess-btn[data-mark="×"] { color: #ea4335; }
-.assess-btn.selected[data-mark="○"] { background: #e6f4ea; border-color: #0d652d; }
-.assess-btn.selected[data-mark="△"] { background: #fef7e0; border-color: #e37400; }
-.assess-btn.selected[data-mark="×"] { background: #fce8e6; border-color: #ea4335; }
+.assess-btn[data-mark="○"] { color: #1a7a4a; }
+.assess-btn[data-mark="△"] { color: #c07a00; }
+.assess-btn[data-mark="×"] { color: #e05c4a; }
+.assess-btn.selected[data-mark="○"] { background: #e3f5ec; border-color: #1a7a4a; }
+.assess-btn.selected[data-mark="△"] { background: #fef7e0; border-color: #c07a00; }
+.assess-btn.selected[data-mark="×"] { background: #fce8e6; border-color: #e05c4a; }
 
 /* Navigation within overlay */
 .overlay-nav {
@@ -355,8 +358,8 @@ body {
 }
 .nav-btn:active { background: var(--primary-light); }
 .nav-btn:disabled {
-  color: #ccc;
-  border-color: #eee;
+  color: #bccfdd;
+  border-color: #dde9f2;
 }
 
 /* Slides section */
@@ -385,7 +388,7 @@ body {
 .slide-img-wrapper {
   overflow: hidden;
   border-radius: 8px;
-  background: #f8f9fa;
+  background: var(--primary-light);
   border: 1px solid var(--border);
 }
 .slide-img-wrapper img {
@@ -415,7 +418,7 @@ body {
   transition: background .15s;
 }
 .slide-nav-btn:active { background: var(--primary-light); }
-.slide-nav-btn:disabled { color: #ccc; border-color: #eee; }
+.slide-nav-btn:disabled { color: #bccfdd; border-color: #dde9f2; }
 .slide-page {
   font-size: 12px;
   color: var(--text-secondary);
@@ -430,7 +433,7 @@ body {
 }
 .no-slides {
   padding: 16px;
-  background: #f8f9fa;
+  background: var(--primary-light);
   border-radius: 8px;
   border: 1px dashed var(--border);
   text-align: center;
@@ -438,7 +441,7 @@ body {
   font-size: 12px;
 }
 
-/* Content swiper (解説 ←→ Q&A) */
+/* Content swiper (薬価算定の基準 ←→ Q&A) */
 .content-swiper {
   display: flex;
   overflow-x: auto;
@@ -474,7 +477,7 @@ body {
   transition: all .2s;
 }
 .content-tab.active {
-  background: var(--primary);
+  background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-mid) 100%);
   color: #fff;
 }
 
@@ -538,7 +541,7 @@ body {
   flex-shrink: 0;
   font-size: 9px;
   background: #fff3e0;
-  color: #e65100;
+  color: #c07a00;
   padding: 2px 5px;
   border-radius: 4px;
   font-weight: 600;
@@ -585,14 +588,14 @@ body {
 }
 .progress-fill {
   height: 100%;
-  background: var(--primary);
+  background: linear-gradient(90deg, var(--primary-dark) 0%, var(--primary-mid) 100%);
   transition: width .3s;
 }
 
 /* Search */
 .search-bar {
   padding: 8px 12px;
-  background: #fff;
+  background: linear-gradient(180deg, #dceef8 0%, #eef4f9 100%);
   border-bottom: 1px solid var(--border);
 }
 .search-input {
@@ -602,9 +605,9 @@ body {
   border-radius: 8px;
   font-size: 14px;
   outline: none;
-  background: var(--bg);
+  background: #fff;
 }
 .search-input:focus {
   border-color: var(--primary);
-  background: #fff;
+  box-shadow: 0 0 0 3px rgba(45,106,159,.12);
 }
