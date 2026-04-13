@@ -1,33 +1,27 @@
-const CACHE_NAME = 'yakka-v3';
+const CACHE_NAME = 'yakka-v4';
 const APP_SHELL = [
   './',
   './index.html',
   './dashboard.html',
   './export.html',
-  './strategy.html',
-  './data.js',
+  './manifest.json',
+  './css/style.css',
   './js/store.js',
   './js/app.js',
   './js/dashboard.js',
-  './js/version_config.js',
   './js/qa_parser.js',
   './js/word_export.js',
-  './js/strategy_data.js',
-  './js/strategy.js',
-  './js/qa_text_01.js',
-  './js/qa_text_02.js',
-  './js/qa_text_03.js',
-  './js/qa_text_04.js',
-  './js/qa_text_05.js',
-  './js/qa_text_06.js',
-  './js/qa_text_07.js',
-  './js/qa_text_index.js',
-  './css/style.css',
-  './css/dashboard.css',
-  './css/strategy.css',
-  './manifest.json',
-  './icons/icon-192.png',
-  './icons/icon-512.png'
+  './data/r08/data.js',
+  './data/r08/qa_text_index.js',
+  './js/qa_text_r8_01.js',
+  './js/qa_text_r8_02.js',
+  './js/qa_text_r8_03.js',
+  './js/qa_text_r8_04.js',
+  './js/qa_text_r8_05.js',
+  './js/qa_text_r8_06.js',
+  './js/qa_text_r8_07.js',
+  './js/qa_text_r8_08.js',
+  './icons/app_logo.png'
 ];
 
 const SLIDE_CACHE = 'yakka-slides-v1';

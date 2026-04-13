@@ -737,7 +737,7 @@ const QA_DATA_R08 = [
     "breadcrumb": "第３章 > 第９節 革新的新薬薬価維持制度 （Patent-period price Maintenance Program",
     "title": "第９節-２ 対象企業",
     "answer": "本規定の対象企業は、 次に掲げる企業以外の企業とする。ただし、 新薬の薬価収載の際に当該新薬以外に１の要件を満たす品目を有さない企業については、当該新薬の 薬価収載時点において 本規定の対象企業として 取り扱う。\nイ 未承認薬等検討会議における検討結果を踏まえ、厚生労働省から開発を要請された品目について、開発の拒否、合理的な理由のない開発の遅延等、適切に対応を行わなかった企業\nロ 別表10の確認事項について、過去５年 間いずれの 事項にも該当するものがない企業",
-    "slides": ["henkou_p21.jpg", "henkou_p22.jpg", "henkou_p23.jpg", "henkou_p24.jpg", "jyuuyou_p08.jpg", "jyuuyou_p09.jpg", "jyuuyou_p10.jpg", "beppyo_p65.jpg", "r6kaitei_p18.jpg", "qa_r8_item_85"],
+    "slides": ["henkou_p21.jpg", "henkou_p22.jpg", "henkou_p23.jpg", "henkou_p24.jpg", "jyuuyou_p08.jpg", "jyuuyou_p09.jpg", "jyuuyou_p10.jpg", "beppyo_p65.jpg", "r6kaitei_p18.jpg", "qa_r8_item_84"],
     "qa_questions": ["131", "131-2", "131-3", "131-4", "131-5", "131-6", "131-7", "131-8", "131-9", "131-10", "131-11", "131-12", "131-13", "131-14", "131-15", "131-16"]
   },
   {
@@ -746,7 +746,7 @@ const QA_DATA_R08 = [
     "breadcrumb": "第３章 > 第９節 革新的新薬薬価維持制度 （Patent-period price Maintenance Program",
     "title": "第９節-３ 薬価の改定方式",
     "answer": "１に該当する品目については、２に掲げる企業が製造販売するものに限り、薬価改定前の薬価に改定する 。\nただし、 本規定の適用前の 価格が薬価改定前の薬価を上回る場合 又は当該品目の乖離率が全ての既収載品の平均乖離率を超える 場合においては 、本規定は適用しない。",
-    "slides": ["henkou_p21.jpg", "henkou_p22.jpg", "henkou_p23.jpg", "henkou_p24.jpg", "jyuuyou_p08.jpg", "jyuuyou_p09.jpg", "jyuuyou_p10.jpg", "r6kaitei_p20.jpg", "qa_r8_item_86"],
+    "slides": ["henkou_p21.jpg", "henkou_p22.jpg", "henkou_p23.jpg", "henkou_p24.jpg", "jyuuyou_p08.jpg", "jyuuyou_p09.jpg", "jyuuyou_p10.jpg", "r6kaitei_p20.jpg", "qa_r8_item_84"],
     "qa_questions": ["131", "131-2", "131-3", "131-4", "131-5", "131-6", "131-7", "131-8", "131-9", "131-10", "131-11", "131-12", "131-13", "131-14", "131-15", "131-16"]
   },
   {
