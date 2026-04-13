@@ -189,7 +189,9 @@
         html += `<div class="qa-a-line">${escapeHtml(line)}</div>`;
       } else if (/^（解説）/.test(line) || /^（解説）/.test(line)) {
         html += `<div class="qa-ex-line">${escapeHtml(line)}</div>`;
-      } else if (/^(第[1-9１-９]章|第[1-9１-９]節|＜|<|\d+[.．]\s|[０-９]+[.．])/.test(line) && line.length < 40) {
+      } else if (/^＜[^＞]+＞/.test(line)) {
+        html += `<div class="qa-subheader-line">${escapeHtml(line)}</div>`;
+      } else if (/^(第[1-9１-９]章|第[1-9１-９]節|<|\d+[.．]\s|[０-９]+[.．])/.test(line) && line.length < 40) {
         html += `<div class="qa-section-line">${escapeHtml(line)}</div>`;
       } else {
         html += `<div class="qa-normal-line">${escapeHtml(line)}</div>`;

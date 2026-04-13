@@ -520,6 +520,14 @@ body {
   margin-top: 20px;
   color: var(--text);
 }
+.qa-text-content .qa-subheader-line {
+  font-weight: 700;
+  font-size: 13px;
+  margin-top: 20px;
+  padding: 5px 0 4px;
+  border-top: 1px solid var(--border);
+  color: var(--text-secondary);
+}
 .qa-text-content .qa-normal-line {
   margin-top: 2px;
 }
