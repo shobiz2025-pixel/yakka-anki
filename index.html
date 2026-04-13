@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#1a73e8">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<title>薬価算定の基準 暗記ツール</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="header">
+  <h1>薬価算定の基準</h1>
+  <span class="count" id="viewCount">0/112</span>
+  <select id="versionSelect" class="version-select" onchange="switchVersion(this.value)" title="年度版切替"></select>
+  <a href="dashboard.html" class="header-link">📊</a>
+</div>
+
+<div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+
+<div class="search-bar">
+  <input type="text" class="search-input" id="searchInput" placeholder="キーワードで検索...">
+</div>
+
+<div class="filter-bar" id="filterBar">
+  <button class="filter-btn active" data-filter="all">すべて</button>
+  <button class="filter-btn" data-filter="第１章">第１章 定義</button>
+  <button class="filter-btn" data-filter="第２章">第２章 新規収載品</button>
+  <button class="filter-btn" data-filter="第３章">第３章 既収載品</button>
+  <button class="filter-btn" data-filter="第４章">第４章 実施時期等</button>
+</div>
+
+<div class="question-list" id="questionList"></div>
+
+<!-- Answer overlay -->
+<div class="overlay" id="overlay">
+  <div class="overlay-backdrop" id="overlayBackdrop"></div>
+  <div class="overlay-panel">
+    <div class="drag-handle" id="dragHandle"><div class="drag-handle-bar"></div></div>
+    <div class="overlay-header">
+      <div class="overlay-header-text">
+        <div class="overlay-breadcrumb" id="overlayBreadcrumb"></div>
+        <span class="q-label" id="overlayTitle"></span>
+      </div>
+      <button class="close-btn" id="closeBtn">&times;</button>
+    </div>
+    <div class="overlay-body" id="overlayBody">
+      <!-- Tab indicator above swipeable content -->
+      <div class="content-tabs" id="contentTabs">
+        <span class="content-tab active" data-page="0">解説</span>
+        <span class="content-tab" data-page="1">Q&A</span>
+      </div>
+      <!-- Swipeable text area: 解説 ←→ Q&A -->
+      <div class="content-swiper" id="contentSwiper">
+        <div class="content-page" id="answerPage">
+          <div class="answer-text" id="answerText"></div>
+        </div>
+        <div class="content-page" id="qaTextPage">
+          <div class="qa-text-content" id="qaTextContent"></div>
+        </div>
+      </div>
+      <!-- Slides always visible below -->
+      <div class="slides-section" id="slidesSection"></div>
+    </div>
+    <div class="assessment-bar">
+      <button class="assess-btn" data-mark="○">○</button>
+      <button class="assess-btn" data-mark="△">△</button>
+      <button class="assess-btn" data-mark="×">×</button>
+    </div>
+    <div class="overlay-nav">
+      <button class="nav-btn" id="prevBtn">&#9664; 前へ</button>
+      <button class="nav-btn" id="nextBtn">次へ &#9654;</button>
+    </div>
+  </div>
+</div>
+
+<!-- Fullscreen image viewer -->
+<div class="img-viewer" id="imgViewer">
+  <button class="img-viewer-close" id="imgViewerClose">&times;</button>
+  <img id="imgViewerImg" src="" alt="">
+</div>
+
+<script src="data.js"></script>
+<!-- 令和6年度版テキスト -->
+<script src="js/qa_text_01.js"></script>
+<script src="js/qa_text_02.js"></script>
+<script src="js/qa_text_03.js"></script>
+<script src="js/qa_text_04.js"></script>
+<script src="js/qa_text_05.js"></script>
+<script src="js/qa_text_06.js"></script>
+<script src="js/qa_text_07.js"></script>
+<script src="js/qa_text_index.js"></script>
+<!-- 令和8年度版テキスト -->
+<script src="js/qa_text_r8_01.js"></script>
+<script src="js/qa_text_r8_02.js"></script>
+<script src="js/qa_text_r8_03.js"></script>
+<script src="js/qa_text_r8_04.js"></script>
+<script src="js/qa_text_r8_05.js"></script>
+<script src="js/qa_text_r8_06.js"></script>
+<script src="js/qa_text_r8_07.js"></script>
+<script src="js/qa_text_r8_08.js"></script>
+<script src="data/r08/qa_text_index.js"></script>
+<script src="js/version_config.js"></script>
+<script src="js/qa_parser.js"></script>
+<script src="js/word_export.js"></script>
+<script src="js/store.js"></script>
+<script src="js/app.js"></script>
+<script>
+// バージョン切替UI初期化
+(function() {
+  function initVersionSelect() {
+    if (typeof VersionConfig === 'undefined') return;
+    var select = document.getElementById('versionSelect');
+    if (!select) return;
+    var versions = VersionConfig.getAllVersions();
+    var currentId = VersionConfig.getCurrentVersionId();
+    select.innerHTML = '';
+    versions.forEach(function(v) {
+      var opt = document.createElement('option');
+      opt.value = v.id;
+      opt.textContent = v.label;
+      opt.selected = (v.id === currentId);
+      select.appendChild(opt);
+    });
+  }
+  window.switchVersion = function(versionId) {
+    if (typeof VersionConfig === 'undefined') return;
+    VersionConfig.setCurrentVersion(versionId);
+    location.reload();
+  };
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initVersionSelect);
+  } else {
+    initVersionSelect();
+  }
+})();
+</script>
+</body>
+</html>
