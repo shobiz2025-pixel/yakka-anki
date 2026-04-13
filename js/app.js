@@ -128,45 +128,31 @@
     const shownQaKeys = new Set(); // 重複排除用
 
     data.forEach(item => {
+      // 未表示のQ&Aキーのみ取得（重複排除）
+      const qaSlides = (item.slides || []).filter(s => s.startsWith('qa_') && !shownQaKeys.has(s));
+      if (qaSlides.length === 0) return; // Q&Aなし条文はスキップ
+
+      const texts = qaSlides.map(s => {
+        shownQaKeys.add(s);
+        return qaTextAll[s];
+      }).filter(Boolean);
+      if (texts.length === 0) return;
+
+      const rawText = texts.join('\n\n');
+      const filtered = item.qa_questions && item.qa_questions.length > 0
+        ? filterQaTextByQuestions(rawText, item.qa_questions)
+        : rawText;
+      if (!filtered) return;
+
       const sectionKey = item.breadcrumb || item.section;
       if (sectionKey !== lastSection) {
         lastSection = sectionKey;
         const chClass = getChapterClass(item.section);
         html += `<div class="qa-all-section-header ${chClass}">${sectionKey}</div>`;
       }
-      const titleDisplay = item.title.length > 60
-        ? item.title.substring(0, 60) + '…'
-        : item.title;
-
-      // 条文テキスト（常に表示）
-      const answerHtml = `<div class="qa-all-item-body">${escapeHtml(item.answer).replace(/\n/g, '<br>')}</div>`;
-
-      // 未表示のQ&Aキーのみ取得（重複排除）
-      const qaSlides = (item.slides || []).filter(s => s.startsWith('qa_') && !shownQaKeys.has(s));
-      let qaHtml = '';
-      if (qaSlides.length > 0) {
-        const texts = qaSlides.map(s => {
-          shownQaKeys.add(s);
-          return qaTextAll[s];
-        }).filter(Boolean);
-
-        if (texts.length > 0) {
-          const rawText = texts.join('\n\n');
-          // qa_questionsフィルターを適用（ある場合）
-          const filtered = item.qa_questions && item.qa_questions.length > 0
-            ? filterQaTextByQuestions(rawText, item.qa_questions)
-            : rawText;
-          if (filtered) {
-            qaHtml = `<div class="qa-all-qa-block"><div class="qa-text-content">${formatQaText(filtered)}</div></div>`;
-          }
-        }
-      }
 
       html += `<div class="qa-all-item">
-        <div class="qa-all-item-title">
-          <span class="qa-all-item-num">${item.id}</span>${titleDisplay}
-        </div>
-        ${answerHtml}${qaHtml}
+        <div class="qa-text-content">${formatQaText(filtered)}</div>
       </div>`;
     });
 
