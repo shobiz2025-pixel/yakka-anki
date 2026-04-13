@@ -493,23 +493,26 @@ body {
 }
 .qa-text-content .qa-q-line {
   font-weight: 700;
-  color: var(--primary);
-  margin-top: 16px;
-  padding-top: 8px;
-  border-top: 1px solid var(--border);
+  color: var(--primary-dark);
+  background: var(--primary-light);
+  border-left: 4px solid var(--primary);
+  padding: 8px 12px;
+  border-radius: 0 6px 6px 0;
+  margin-top: 20px;
 }
 .qa-text-content .qa-q-line:first-child {
   margin-top: 0;
-  padding-top: 0;
-  border-top: none;
 }
 .qa-text-content .qa-a-line {
-  margin-top: 4px;
+  margin-top: 6px;
+  padding-left: 4px;
 }
 .qa-text-content .qa-ex-line {
   color: var(--text-secondary);
   font-size: 12px;
   margin-top: 4px;
+  padding-left: 4px;
+  border-left: 2px solid var(--border);
 }
 .qa-text-content .qa-section-line {
   font-weight: 700;
