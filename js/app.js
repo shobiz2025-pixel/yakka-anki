@@ -45,7 +45,8 @@
       const matchSearch = !currentSearch ||
         item.title.includes(currentSearch) ||
         item.answer.includes(currentSearch) ||
-        item.breadcrumb.includes(currentSearch);
+        item.breadcrumb.includes(currentSearch) ||
+        getQaTextsForItem(item).includes(currentSearch);
       return matchFilter && matchSearch;
     });
   }
