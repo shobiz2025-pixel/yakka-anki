@@ -125,6 +125,8 @@
     let html = '';
     let lastSection = '';
     const shownQaKeys = new Set(); // 重複排除用
+    const sectionList = []; // TOC用
+    let sectionIdx = 0;
 
     data.forEach(item => {
       // 未表示のQ&Aキーのみ取得（重複排除）
@@ -147,7 +149,9 @@
       if (sectionKey !== lastSection) {
         lastSection = sectionKey;
         const chClass = getChapterClass(item.section);
-        html += `<div class="qa-all-section-header ${chClass}">${sectionKey}</div>`;
+        const anchorId = 'qa-sec-' + sectionIdx++;
+        sectionList.push({ id: anchorId, label: sectionKey, chClass });
+        html += `<div id="${anchorId}" class="qa-all-section-header ${chClass}">${sectionKey}</div>`;
       }
 
       html += `<div class="qa-all-item">
@@ -156,7 +160,14 @@
       </div>`;
     });
 
-    view.innerHTML = html;
+    // TOCナビゲーション
+    let tocHtml = '<div class="qa-all-toc"><div class="qa-all-toc-toggle" onclick="this.parentElement.classList.toggle(\'open\')">▼ セクションジャンプ <span class="qa-all-toc-count">(' + sectionList.length + ')</span></div><div class="qa-all-toc-links">';
+    sectionList.forEach(sec => {
+      tocHtml += `<a class="qa-all-toc-link ${sec.chClass}" onclick="document.getElementById('${sec.id}').scrollIntoView({behavior:'smooth',block:'start'});">${escapeHtml(sec.label)}</a>`;
+    });
+    tocHtml += '</div></div>';
+
+    view.innerHTML = tocHtml + html;
   }
 
   // ==============================
