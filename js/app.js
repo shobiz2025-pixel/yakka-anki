@@ -625,6 +625,14 @@
   renderList();
   handleDeepLink();
 
+  // Scroll-to-top button: show when scrolled down
+  const scrollTopBtn = document.getElementById('scrollTopBtn');
+  window.addEventListener('scroll', () => {
+    if (scrollTopBtn) {
+      scrollTopBtn.classList.toggle('visible', window.scrollY > 200);
+    }
+  }, { passive: true });
+
   // Service worker
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('./sw.js');

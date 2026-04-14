@@ -773,3 +773,32 @@ body {
 .qa-all-toc-link.ch2 { border-left: 3px solid var(--section-ch2); }
 .qa-all-toc-link.ch3 { border-left: 3px solid var(--section-ch3); }
 .qa-all-toc-link.ch4 { border-left: 3px solid var(--section-ch4); }
+
+/* ページトップへ戻るボタン */
+.scroll-top-btn {
+  position: fixed;
+  bottom: 72px;
+  right: 16px;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+  z-index: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.scroll-top-btn.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+.scroll-top-btn:active { transform: scale(0.92); }
