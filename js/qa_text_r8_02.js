@@ -10,9 +10,11 @@ const QA_TEXT_R8_02 = {
 問32　新規後発品について、同一剤形区分内における「剤形の違いは考慮しない」ということを具体的に示されたい。
 （答）新規後発品の薬価算定の際、類似薬、最類似薬を選定するにあたって（ニ）に関連して同一剤形区分内のものは同一と考えるということ。
 （例）組成Pの新規後発品B 100mg錠の算定において、類似薬が
-後発品C<w:t>100mg錠　</w:r><w:r><w:rPr><w:rFonts w:ascii="ＭＳ 明朝" w:eastAsia="ＭＳ 明朝" w:hAnsi="ＭＳ 明朝" w:hint="eastAsia"/><w:color w:val="000000"/><w:sz w:val="21"/><w:szCs w:val="21"/><w:lang w:eastAsia="zh-TW"/></w:rPr><w:t xml:space="preserve">　80.50円後発品D<w:t>100mg錠</w:r><w:r><w:rPr><w:rFonts w:ascii="ＭＳ 明朝" w:eastAsia="ＭＳ 明朝" w:hAnsi="ＭＳ 明朝" w:hint="eastAsia"/><w:color w:val="000000"/><w:sz w:val="21"/><w:szCs w:val="21"/><w:lang w:eastAsia="zh-TW"/></w:rPr><w:t xml:space="preserve">　</w:r><w:r><w:rPr><w:rFonts w:ascii="ＭＳ 明朝" w:eastAsia="ＭＳ 明朝" w:hAnsi="ＭＳ 明朝" w:hint="eastAsia"/><w:color w:val="000000"/><w:sz w:val="21"/><w:szCs w:val="21"/><w:lang w:eastAsia="zh-TW"/></w:rPr><w:t xml:space="preserve">　75.00円後発品E<w:t>100mgｶﾌﾟｾﾙ</w:r><w:r><w:rPr><w:rFonts w:ascii="ＭＳ 明朝" w:eastAsia="ＭＳ 明朝" w:hAnsi="ＭＳ 明朝" w:hint="eastAsia"/><w:color w:val="000000"/><w:sz w:val="21"/><w:szCs w:val="21"/><w:lang w:eastAsia="zh-TW"/></w:rPr><w:t xml:space="preserve">　60.20円
+後発品C 100mg錠　80.50円
+後発品D 100mg錠　75.00円
+後発品E 100mgｶﾌﾟｾﾙ　60.20円
 である場合（第２部２（１）に該当）、最類似薬は
-（剤形を考慮）</w:r><w:r w:rsidR="000910C5"><w:rPr><w:rFonts w:ascii="ＭＳ 明朝" w:eastAsia="ＭＳ 明朝" w:hAnsi="ＭＳ 明朝" w:hint="eastAsia"/><w:color w:val="000000"/><w:sz w:val="21"/><w:szCs w:val="21"/></w:rPr><w:t xml:space="preserve"> D　75.00円　←　同一剤形（錠剤）のうちの最低額
+（剤形を考慮） D　75.00円　←　同一剤形（錠剤）のうちの最低額
 （剤形を考慮せず）　E　60.20円　←　同一剤形区分（ｶﾌﾟｾﾙ剤を含め）のうちの最低額となる。新規後発品Bのときは剤形考慮しないので、算定薬価は60.20円となる。
 
 問33　新薬算定において、類似薬が昭和54年以前承認の既収載品しか存在しない（再審査制度がないので薬価算定上の新薬が存在しない）場合は、どのような比較薬を選定するのか。
@@ -96,12 +98,9 @@ const QA_TEXT_R8_02 = {
 問51　投与形態が異なる場合の算定例を示されたい。
 （答）例えば内用薬と注射剤の場合。
 （例）例えば、A社価格は一日薬価、B社価格は薬価。
-注射剤
-錠・ｶﾌﾟｾﾙ
-A社：○○注1%1mL（新薬）X円
-A社：○○錠1mg（比較薬）100円
-B社：△△注1%1mL（既収載）180円
-B社：△△ｶﾌﾟｾﾙ20mg（既収載）80円
+| 注射剤 | 錠・ｶﾌﾟｾﾙ |
+| A社：○○注1%1mL（新薬）X円 | A社：○○錠1mg（比較薬）100円 |
+| B社：△△注1%1mL（既収載）180円 | B社：△△ｶﾌﾟｾﾙ20mg（既収載）80円 |
 新薬の一日薬価＝比較薬の一日薬価×剤形間比
 ＝100×（180／10）／（80／20）
 ＝450円
