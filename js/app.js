@@ -433,13 +433,29 @@
   });
 
   // Search
+  const searchInput = document.getElementById('searchInput');
+  const searchClear = document.getElementById('searchClear');
   let searchTimeout;
-  document.getElementById('searchInput').addEventListener('input', (e) => {
+
+  function updateSearchClear() {
+    searchClear.classList.toggle('visible', searchInput.value.length > 0);
+  }
+
+  searchInput.addEventListener('input', (e) => {
     clearTimeout(searchTimeout);
+    updateSearchClear();
     searchTimeout = setTimeout(() => {
       currentSearch = e.target.value.trim();
       renderList();
     }, 200);
+  });
+
+  searchClear.addEventListener('click', () => {
+    searchInput.value = '';
+    currentSearch = '';
+    updateSearchClear();
+    renderList();
+    searchInput.focus();
   });
 
   // Swipe down to close overlay — ドラッグハンドル部分のみ有効
