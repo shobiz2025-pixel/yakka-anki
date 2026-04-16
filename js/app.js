@@ -154,9 +154,12 @@
         html += `<div id="${anchorId}" class="qa-all-section-header ${chClass}">${sectionKey}</div>`;
       }
 
+      const memo = YakkaStore.getMemo(item.id);
+      const memoHtml = memo ? `<div class="qa-all-memo"><span class="qa-all-memo-label">自分メモ</span><div class="qa-all-memo-body">${escapeHtml(memo)}</div></div>` : '';
       html += `<div class="qa-all-item">
         <div class="qa-all-subsection-header">${item.title}</div>
         <div class="qa-text-content">${formatQaText(filtered)}</div>
+        ${memoHtml}
       </div>`;
     });
 
@@ -354,6 +357,7 @@
     setupContentSwiper(item);
     renderSlides(item);
     updateAssessmentBar(item.id);
+    loadMemoToOverlay(item.id);
 
     document.getElementById('overlay').classList.add('open');
     document.getElementById('overlayBody').scrollTop = 0;
@@ -379,6 +383,62 @@
       btn.classList.toggle('selected', btn.dataset.mark === current);
     });
   }
+
+  // ==============================
+  // Memo
+  // ==============================
+  let memoCurrentItemId = null;
+  let memoSaveTimeout = null;
+
+  function loadMemoToOverlay(itemId) {
+    memoCurrentItemId = itemId;
+    const ta = document.getElementById('memoTextarea');
+    const saved = document.getElementById('memoSaved');
+    ta.value = YakkaStore.getMemo(itemId);
+    saved.textContent = '';
+  }
+
+  document.getElementById('memoTextarea').addEventListener('input', () => {
+    clearTimeout(memoSaveTimeout);
+    document.getElementById('memoSaved').textContent = '...';
+    memoSaveTimeout = setTimeout(() => {
+      if (memoCurrentItemId !== null) {
+        YakkaStore.saveMemo(memoCurrentItemId, document.getElementById('memoTextarea').value);
+        document.getElementById('memoSaved').textContent = '保存済み';
+        setTimeout(() => { document.getElementById('memoSaved').textContent = ''; }, 1500);
+      }
+    }, 600);
+  });
+
+  // Export
+  document.getElementById('memoExportBtn').addEventListener('click', () => {
+    const json = YakkaStore.exportMemos();
+    const blob = new Blob([json], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'yakka_memos.json';
+    a.click();
+    URL.revokeObjectURL(url);
+  });
+
+  // Import
+  document.getElementById('memoImportInput').addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+      try {
+        YakkaStore.importMemos(ev.target.result);
+        alert('メモをインポートしました');
+        if (memoCurrentItemId !== null) loadMemoToOverlay(memoCurrentItemId);
+      } catch(err) {
+        alert('インポートに失敗しました: ' + err.message);
+      }
+      e.target.value = '';
+    };
+    reader.readAsText(file);
+  });
 
   function updateProgress() {
     const total = getCurrentQaData().length;
