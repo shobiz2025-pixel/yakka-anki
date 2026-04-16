@@ -6,14 +6,6 @@ window.YakkaStore = (function() {
   const ITEMS_KEY = 'yakka_items';
   const DAILY_KEY = 'yakka_daily';
   const OLD_KEY = 'yakka_viewed';
-  const MEMOS_KEY = 'yakka_memos';
-
-  function loadMemos() {
-    return JSON.parse(localStorage.getItem(MEMOS_KEY) || '{}');
-  }
-  function saveMemos(memos) {
-    localStorage.setItem(MEMOS_KEY, JSON.stringify(memos));
-  }
 
   function loadItems() {
     return JSON.parse(localStorage.getItem(ITEMS_KEY) || '{}');
@@ -182,39 +174,6 @@ window.YakkaStore = (function() {
       });
       scored.sort((a, b) => a.score - b.score);
       return scored.slice(0, n);
-    },
-
-    getMemo(itemId) {
-      return loadMemos()[itemId] || '';
-    },
-
-    saveMemo(itemId, text) {
-      const memos = loadMemos();
-      if (text.trim() === '') {
-        delete memos[itemId];
-      } else {
-        memos[itemId] = text;
-      }
-      saveMemos(memos);
-    },
-
-    hasMemo(itemId) {
-      const memos = loadMemos();
-      return !!memos[itemId] && memos[itemId].trim().length > 0;
-    },
-
-    getAllMemos() {
-      return loadMemos();
-    },
-
-    exportMemos() {
-      return JSON.stringify(loadMemos(), null, 2);
-    },
-
-    importMemos(jsonStr) {
-      const parsed = JSON.parse(jsonStr);
-      if (typeof parsed !== 'object' || Array.isArray(parsed)) throw new Error('invalid format');
-      saveMemos(parsed);
     },
 
     getCalendarData(months) {

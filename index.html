@@ -18,8 +18,6 @@
   <img src="icons/app_logo.png" class="header-logo" alt="ロゴ">
   <h1>薬価算定の基準</h1>
   <span class="count" id="viewCount">0/112</span>
-  <button class="header-icon-btn" id="memoExportBtn" title="メモをエクスポート">💾</button>
-  <label class="header-icon-btn" title="メモをインポート">📂<input type="file" id="memoImportInput" accept=".json" style="display:none"></label>
   <a href="dashboard.html" class="header-link">📊</a>
 </div>
 <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
@@ -73,11 +71,6 @@
       </div>
       <!-- Slides always visible below -->
       <div class="slides-section" id="slidesSection"></div>
-      <!-- Personal memo -->
-      <div class="memo-section" id="memoSection">
-        <div class="memo-header">自分メモ <span class="memo-saved" id="memoSaved"></span></div>
-        <textarea class="memo-textarea" id="memoTextarea" placeholder="この項目のメモを入力できます（自動保存）"></textarea>
-      </div>
     </div>
     <div class="assessment-bar">
       <button class="assess-btn" data-mark="○">○</button>
